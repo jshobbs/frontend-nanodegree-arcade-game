@@ -1,0 +1,5 @@
+Sources Used:
+Mozilla Developers Network
+Udacity Discussions
+Stack Overflow
+GitHub repository for downloading artwork and game engine
