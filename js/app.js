@@ -17,7 +17,7 @@ var Enemy = function(x,y, speed) {
     GameCharacter.call(this, x, y);
     this.sprite = 'images/enemy-bug.png';
     this.speed = speed;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -36,12 +36,12 @@ Enemy.prototype.update = function(dt) {
     }
 
     this.checkCollisions();
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Check for collision between enemy and player
 Enemy.prototype.checkCollisions = function() {
@@ -53,7 +53,7 @@ Enemy.prototype.checkCollisions = function() {
                 player.reset();
         }
     });
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -61,7 +61,7 @@ Enemy.prototype.checkCollisions = function() {
 var Player = function(x,y) {
     GameCharacter.call(this, x, y);
     this.sprite = 'images/char-boy.png';
-}
+};
 
 
 Player.prototype.update = function(dt) {
@@ -69,11 +69,11 @@ Player.prototype.update = function(dt) {
         player.render();
         player.reset();
     }
-}
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Handle keyboard entry with the string passed
 Player.prototype.handleInput = function(direction){
@@ -89,13 +89,13 @@ Player.prototype.handleInput = function(direction){
     if(direction === 'down' && this.y < 400){
         this.y +=82.5;
     }
-}
+};
 
 // If collision or player reaches water, reset player to start.
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
