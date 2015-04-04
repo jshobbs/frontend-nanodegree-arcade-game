@@ -51,25 +51,24 @@ app.js
 This JS file is where all of my work was done to get the project running.
 
 In this file, I started by creating a superclass called GameCharacter that
-set the position for the player and enemies.
-var GameCharacter = function(x,y){
+set the position and image for the player and enemies.
+var GameCharacter = function(x,y,imageSprite){
     this.x = x;
     this.y = y;
+    this.sprite = imageSprite;
 };
 
 I created a constructor for the Enemy objects that called GameCharacter
-to set the postion and saved the enemy image and speed.
+to set the position and saved the enemy speed.
 var Enemy = function(x,y, speed) {
-    GameCharacter.call(this, x, y);
-    this.sprite = 'images/enemy-bug.png';
+    GameCharacter.call(this, x, y, 'images/enemy-bug.png');
     this.speed = speed;
 };
 
 I created a constructor for the Player objects that called GameCharacter
-to set the position and saved the player image.
+to set the position.
 var Player = function(x,y) {
-    GameCharacter.call(this, x, y);
-    this.sprite = 'images/char-boy.png';
+    GameCharacter.call(this, x, y, 'images/char-boy.png');
 };
 
 I create an array of Y positions representing rows for enemies to cross.
@@ -90,11 +89,6 @@ Enemy.prototype.update = function(dt) {
     }
 
     this.checkCollisions();
-};
-
-I added the drawImage function call with the correct arguments.
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 I added the checkCollisions function to check if player collided with enemy.
@@ -118,8 +112,10 @@ Player.prototype.update = function(dt) {
     }
 };
 
-I added the drawImage function call with the correct arguments.
-Player.prototype.render = function() {
+I added the drawImage function call with the correct arguments. I used prototyping
+to use the super class for the render function since the code in the render function
+is the same in both Enemy and Player prototypes.
+GameCharacter.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 

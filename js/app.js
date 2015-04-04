@@ -1,7 +1,8 @@
 // Superclass
-var GameCharacter = function(x,y){
+var GameCharacter = function(x,y,imageSprite){
     this.x = x;
     this.y = y;
+    this.sprite = imageSprite;
 };
 
 // Create an array of Y positions representing rows for enemies to cross
@@ -14,10 +15,12 @@ var Enemy = function(x,y, speed) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    GameCharacter.call(this, x, y);
-    this.sprite = 'images/enemy-bug.png';
+    GameCharacter.call(this, x, y, 'images/enemy-bug.png');
     this.speed = speed;
 };
+
+Enemy.prototype = Object.create(GameCharacter.prototype);
+Enemy.prototype.constructor = Enemy;
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -38,11 +41,6 @@ Enemy.prototype.update = function(dt) {
     this.checkCollisions();
 };
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
 // Check for collision between enemy and player
 Enemy.prototype.checkCollisions = function() {
     allEnemies.forEach(function(enemy) {
@@ -59,10 +57,11 @@ Enemy.prototype.checkCollisions = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x,y) {
-    GameCharacter.call(this, x, y);
-    this.sprite = 'images/char-boy.png';
+    GameCharacter.call(this, x, y, 'images/char-boy.png');
 };
 
+Player.prototype = Object.create(GameCharacter.prototype);
+Player.prototype.constructor = Player;
 
 Player.prototype.update = function(dt) {
     if(this.y < 20) {
@@ -71,7 +70,8 @@ Player.prototype.update = function(dt) {
     }
 };
 
-Player.prototype.render = function() {
+// Draw the enemy or player on the screen, required method for game
+GameCharacter.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
