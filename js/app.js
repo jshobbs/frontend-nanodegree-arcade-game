@@ -5,9 +5,6 @@ var GameCharacter = function(x,y,imageSprite){
     this.sprite = imageSprite;
 };
 
-// Create an array of Y positions representing rows for enemies to cross
-//var yPosition = [60,144,228];
-
 // Enemies our player must avoid
 var Enemy = function(x,y, speed) {
     // Variables applied to each of our instances go here,
@@ -17,6 +14,8 @@ var Enemy = function(x,y, speed) {
     // a helper we've provided to easily load images
     GameCharacter.call(this, x, y, 'images/enemy-bug.png');
     this.speed = speed;
+    
+    // Create an array of Y positions representing rows for enemies to cross
     this.yPosition = [60,144,228];
 };
 
