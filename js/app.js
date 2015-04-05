@@ -6,7 +6,7 @@ var GameCharacter = function(x,y,imageSprite){
 };
 
 // Create an array of Y positions representing rows for enemies to cross
-var yPosition = [60,144,228];
+//var yPosition = [60,144,228];
 
 // Enemies our player must avoid
 var Enemy = function(x,y, speed) {
@@ -17,6 +17,7 @@ var Enemy = function(x,y, speed) {
     // a helper we've provided to easily load images
     GameCharacter.call(this, x, y, 'images/enemy-bug.png');
     this.speed = speed;
+    this.yPosition = [60,144,228];
 };
 
 Enemy.prototype = Object.create(GameCharacter.prototype);
@@ -33,7 +34,7 @@ Enemy.prototype.update = function(dt) {
     // Code to check if enemy has crossed screen, if so, place it
     // back on the left-side and randomly choose the row.
     if (this.x > 600) {
-        this.y = yPosition[Math.floor(Math.random() * yPosition.length)];
+        this.y = this.yPosition[Math.floor(Math.random() * this.yPosition.length)];
         this.speed = (Math.ceil(Math.random() * 3) * 100);
         this.x = -120;
     }
